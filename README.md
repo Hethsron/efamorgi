@@ -54,9 +54,13 @@ For developement, before running the application, you need to clone this project
 
 4. Launch this project locally on your [`Payara Server 5.2020.7`](https://www.payara.fish/downloads/payara-platform-community-edition/)
 
+## Usage
+
+### Command-Line interface
+When you use [`Postman Desktop Agent`](https://www.postman.com/) to to send requests and receive responses through our REST API
+![Figure 1-1. PUT METHOD](./assets/png/1.png)
+![Figure 1-2. GET METHOD](./assets/png/2.png)
+
 ## Tutorial
 
 If you have Community or Ultimate Edition of IntelliJ and want to create your own servlet, you can follow the tutorial [`by Gaurav Gupta`](https://blog.payara.fish/payara-platform-support-for-intellij-plugin)
-
-[!image PUT METHOD](./assets/png/1.png)
-[!image GET METHOD](./assets/png/1.png)
