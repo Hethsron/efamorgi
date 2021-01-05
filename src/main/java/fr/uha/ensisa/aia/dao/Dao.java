@@ -1,0 +1,52 @@
+/**
+ * Copyright © 2020  	Hethsron Jedaël BOUEYA
+ * 						Omar CHICHAOUI
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+package fr.uha.ensisa.aia.dao;
+/**
+ *		@file            	Dao.java
+ *      @details
+ *
+ *      @author          	Hethsron Jedaël BOUEYA (hethsron-jedael.boueya@uha.fr)
+ *      					Omar CHICHAOUI (omar.chichaoui@uha.fr)
+ *
+ *      @version         	0.0.1
+ *      @date            	December, 9th 2020
+ *
+ *      @Copyright       	GPLv3+ : GNU GPL version 3 or later
+ *                       	Licencied Material - Property of Us®
+ *                       	© 2020 ENSISA (UHA) - All rights reserved.
+ */
+import java.util.Collection;
+import java.util.Optional;
+
+/**
+ * @interface   Dao
+ * @brief       Base layer that keeps the domain model completely decoupled from the persistence layer.
+ *
+ * @param       <T>     Type parameter
+ */
+public interface Dao<T> {
+
+    Optional<T> find(long id);
+    Collection<T> findAll();
+    void persist(T t);
+    void update(T t, String[] params);
+    void remove(T t);
+    long count();
+
+}
