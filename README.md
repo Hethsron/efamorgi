@@ -58,8 +58,15 @@ For developement, before running the application, you need to clone this project
 
 ### Command-Line interface
 When you use [`Postman Desktop Agent`](https://www.postman.com/) to to send requests and receive responses through our REST API
-![Figure 1-1. PUT METHOD](./assets/png/1.png)
-![Figure 1-2. GET METHOD](./assets/png/2.png)
+![Figure 1-1.](./assets/png/1.png)
+![Figure 1-2.](./assets/png/2.png)
+![Figure 1-3.](./assets/png/3.png)
+![Figure 1-4.](./assets/png/4.png)
+![Figure 1-5.](./assets/png/5.png)
+![Figure 1-6.](./assets/png/6.png)
+![Figure 1-7.](./assets/png/7.png)
+![Figure 1-8.](./assets/png/8.png)
+![Figure 1-9.](./assets/png/9.png)
 
 ## Tutorial
 
