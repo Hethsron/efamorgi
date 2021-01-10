@@ -66,7 +66,7 @@ public class WebServices extends HttpServlet {
                 resp.setStatus(404);
 
                 // Send HTML object to client
-                out.println("{ error=\'There's no service\', status=\'{HTTP/1.1 404\' }");
+                out.println("{ error=\'There's no service\', status=\'HTTP/1.1 404\' }");
             }
             else {
                 // Sets the status code for this response.
@@ -78,6 +78,7 @@ public class WebServices extends HttpServlet {
             }
         }
         else {
+            // Find MIME Type
             Optional<Mime> mime = Mime.find(type);
             switch (mime.get()) {
                 case JSON:
@@ -111,7 +112,7 @@ public class WebServices extends HttpServlet {
                                     .add("name", s.getName())
                                     .add("description", s.getDescription())
                                     .add("date", s.getDate())
-                                    .add("status", "created")
+                                    .add("status", "OK")
                                     .build());
                         }
 
@@ -146,6 +147,7 @@ public class WebServices extends HttpServlet {
                             out.println("\t\t<name>" + s.getName() + "</name>");
                             out.println("\t\t<description>" + s.getDescription() + "</description>");
                             out.println("\t\t<date>" + s.getDate() + "</date>");
+                            out.println("\t\t<status>OK</status>");
                             out.println("\t</service>");
                         }
                         out.println("</services>");
@@ -161,7 +163,7 @@ public class WebServices extends HttpServlet {
                         resp.setStatus(404);
 
                         // Send HTML object to client
-                        out.println("{ error=\'There's no service\', status=\'{HTTP/1.1 404\' }");
+                        out.println("{ error=\'There's no service\', status=\'HTTP/1.1 404\' }");
                     }
                     else {
                         // Sets the status code for this response.
@@ -196,7 +198,7 @@ public class WebServices extends HttpServlet {
             resp.setStatus(401);
 
             // Send HTML object to client
-            out.println("{ error=\'Unauthorized\', status=\'{HTTP/1.1 401\' }");
+            out.println("{ error=\'Unauthorized\', status=\'HTTP/1.1 401\' }");
         }
         else {
             // Sets the status code for this response.
@@ -208,6 +210,7 @@ public class WebServices extends HttpServlet {
             // Save resource in the database
             factory.getDao().persist(s);
 
+            // Find MIME Type
             Optional<Mime> mime = Mime.find(type);
             switch (mime.get()) {
                 case JSON:
@@ -220,7 +223,7 @@ public class WebServices extends HttpServlet {
                             .add("name", s.getName())
                             .add("description", s.getDescription())
                             .add("date", s.getDate())
-                            .add("status", "created")
+                            .add("status", "Created")
                             .build();
 
                     // Send JSON object to client
@@ -237,6 +240,7 @@ public class WebServices extends HttpServlet {
                     out.println("\t<name>" + s.getName() + "</name>");
                     out.println("\t<description>" + s.getDescription() + "</description>");
                     out.println("\t<date>" + s.getDate() + "</date>");
+                    out.println("\t<status>Created</status>");
                     out.println("</service>");
                     break;
                 default:
@@ -252,7 +256,116 @@ public class WebServices extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        // Sets the character encoding (MIME charset)
+        resp.setCharacterEncoding("UTF-8");
+
+        // Gets PrintWriter object that can send character to client
+        PrintWriter out = resp.getWriter();
+
+        // Gets values of request parameter as a String
+        String id = req.getParameter("id");
+        String name = req.getParameter("name");
+        String description = req.getParameter("description");
+
+        // Gets MIME type of the body of the request
+        final String type = req.getContentType();
+        if ((type == null && id == null && name == null && description == null) || (type.isEmpty() && id.isEmpty() && name.isEmpty() && description.isEmpty())) {
+            // Sets the status code for this response.
+            resp.setStatus(401);
+
+            // Send HTML object to client
+            out.println("{ error=\'Unauthorized\', status=\'HTTP/1.1 401\' }");
+        }
+        else {
+            // Gets resources from database
+            Optional<Service> s = factory.getDao().find(Long.valueOf(id));
+
+            // Check if service is null
+            if (s.isPresent()) {
+                // Sets the status code for this response.
+                resp.setStatus(200);
+
+                // Update information in the database
+                factory.getDao().update(s.get(), new String[]{name, description});
+
+                // Find MIME Type
+                Optional<Mime> mime = Mime.find(type);
+                switch (mime.get()) {
+                    case JSON:
+                        // Sets the content type of the response being sent to the client,
+                        resp.setContentType(Mime.JSON.getType());
+
+                        // Creates a JsonObject Builder
+                        JsonObject value = Json.createObjectBuilder()
+                                .add("id", s.get().getId())
+                                .add("name", s.get().getName())
+                                .add("description", s.get().getDescription())
+                                .add("date", s.get().getDate())
+                                .add("status", "Updated")
+                                .build();
+
+                        // Send JSON object to client
+                        out.println(value.toString());
+                        break;
+                    case XML:
+                        // Sets the content type of the response being sent to the client,
+                        resp.setContentType(Mime.XML.getType());
+
+                        // Send XML object to client
+                        out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                        out.println("<service>");
+                        out.println("\t<id>" + s.get().getId() + "</id>");
+                        out.println("\t<name>" + s.get().getName() + "</name>");
+                        out.println("\t<description>" + s.get().getDescription() + "</description>");
+                        out.println("\t<date>" + s.get().getDate() + "</date>");
+                        out.println("\t<status>Updated</status>");
+                        out.println("</service>");
+                        break;
+                    default:
+                        // Sets the content type of the response being sent to the client,
+                        resp.setContentType(Mime.HTML.getType());
+
+                        // Send HTML object to client
+                        out.println(s.toString());
+                        break;
+                }
+            }
+            else {
+                // Sets the status code for this response.
+                resp.setStatus(409);
+
+                // Find MIME Type
+                Optional<Mime> mime = Mime.find(type);
+                switch (mime.get()) {
+                    case JSON:
+                        // Sets the content type of the response being sent to the client,
+                        resp.setContentType(Mime.JSON.getType());
+
+                        // Creates a JsonObject Builder
+                        JsonObject value = Json.createObjectBuilder()
+                                .add("error", "Conflict")
+                                .add("status", "HTTP/1.1 409")
+                                .build();
+
+                        // Send JSON object to client
+                        out.println(value.toString());
+                        break;
+                    case XML:
+                        // Sets the content type of the response being sent to the client,
+                        resp.setContentType(Mime.XML.getType());
+
+                        // Send XML object to client
+                        out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                        out.println("<error>Conflict</error>");
+                        out.println("<status>HTTP/1.1 409</status>");
+                        break;
+                    default:
+                        // Send HTML object to client
+                        out.println("{ error=\'Conflict\', status=\'HTTP/1.1 409\' }");
+                        break;
+                }
+            }
+        }
     }
 
     @Override
