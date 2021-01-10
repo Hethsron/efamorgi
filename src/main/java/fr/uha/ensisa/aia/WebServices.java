@@ -280,7 +280,7 @@ public class WebServices extends HttpServlet {
             // Gets resources from database
             Optional<Service> s = factory.getDao().find(Long.valueOf(id));
 
-            // Check if service is null
+            // Check if service is not null
             if (s.isPresent()) {
                 // Sets the status code for this response.
                 resp.setStatus(200);
@@ -370,6 +370,113 @@ public class WebServices extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
+        // Sets the character encoding (MIME charset)
+        resp.setCharacterEncoding("UTF-8");
+
+        // Gets PrintWriter object that can send character to client
+        PrintWriter out = resp.getWriter();
+
+        // Gets values of request parameter as a String
+        String id = req.getParameter("id");
+
+        // Gets MIME type of the body of the request
+        final String type = req.getContentType();
+        if ((type == null && id == null) || (type.isEmpty() && id.isEmpty())) {
+            // Sets the status code for this response.
+            resp.setStatus(401);
+
+            // Send HTML object to client
+            out.println("{ error=\'Unauthorized\', status=\'HTTP/1.1 401\' }");
+        }
+        else {
+            // Gets resources from database
+            Optional<Service> s = factory.getDao().find(Long.valueOf(id));
+
+            // Check if service is not null
+            if (s.isPresent()) {
+                // Sets the status code for this response.
+                resp.setStatus(200);
+
+                // Remove service from database
+                factory.getDao().remove(s.get());
+
+                // Find MIME Type
+                Optional<Mime> mime = Mime.find(type);
+                switch (mime.get()) {
+                    case JSON:
+                        // Sets the content type of the response being sent to the client,
+                        resp.setContentType(Mime.JSON.getType());
+
+                        // Creates a JsonObject Builder
+                        JsonObject value = Json.createObjectBuilder()
+                                .add("id", s.get().getId())
+                                .add("name", s.get().getName())
+                                .add("description", s.get().getDescription())
+                                .add("date", s.get().getDate())
+                                .add("status", "Deleted")
+                                .build();
+
+                        // Send JSON object to client
+                        out.println(value.toString());
+                        break;
+                    case XML:
+                        // Sets the content type of the response being sent to the client,
+                        resp.setContentType(Mime.XML.getType());
+
+                        // Send XML object to client
+                        out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                        out.println("<service>");
+                        out.println("\t<id>" + s.get().getId() + "</id>");
+                        out.println("\t<name>" + s.get().getName() + "</name>");
+                        out.println("\t<description>" + s.get().getDescription() + "</description>");
+                        out.println("\t<date>" + s.get().getDate() + "</date>");
+                        out.println("\t<status>Deleted</status>");
+                        out.println("</service>");
+                        break;
+                    default:
+                        // Sets the content type of the response being sent to the client,
+                        resp.setContentType(Mime.HTML.getType());
+
+                        // Send HTML object to client
+                        out.println(s.toString());
+                        break;
+                }
+            }
+            else {
+                // Sets the status code for this response.
+                resp.setStatus(409);
+
+                // Find MIME Type
+                Optional<Mime> mime = Mime.find(type);
+                switch (mime.get()) {
+                    case JSON:
+                        // Sets the content type of the response being sent to the client,
+                        resp.setContentType(Mime.JSON.getType());
+
+                        // Creates a JsonObject Builder
+                        JsonObject value = Json.createObjectBuilder()
+                                .add("error", "Conflict")
+                                .add("status", "HTTP/1.1 409")
+                                .build();
+
+                        // Send JSON object to client
+                        out.println(value.toString());
+                        break;
+                    case XML:
+                        // Sets the content type of the response being sent to the client,
+                        resp.setContentType(Mime.XML.getType());
+
+                        // Send XML object to client
+                        out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                        out.println("<error>Conflict</error>");
+                        out.println("<status>HTTP/1.1 409</status>");
+                        break;
+                    default:
+                        // Send HTML object to client
+                        out.println("{ error=\'Conflict\', status=\'HTTP/1.1 409\' }");
+                        break;
+                }
+            }
+        }
     }
 }
