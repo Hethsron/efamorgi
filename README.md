@@ -58,28 +58,40 @@ For developement, before running the application, you need to clone this project
 
 ### Command-Line interface
 When you use [`Postman Desktop Agent`](https://www.postman.com/) to send requests and receive responses through our REST API :
-   * Gets resources when there are no entries in the database
-![Figure 1-1. GET METHOD](./assets/png/1.png)
-   * Puts resources into the database
-![Figure 1-2. PUT METHOD](./assets/png/2.png)
-![Figure 1-3. PUT METHOD](./assets/png/3.png)
-   * Gets resources where there are entries in the database in XML, JSON or HTML format    
-![Figure 1-4. GET METHOD](./assets/png/4.png)
-![Figure 1-5. GET METHOD](./assets/png/5.png)
-   * Updates information for a specific resource from the database      
-![Figure 1-6. POST METHOD](./assets/png/6.png)
-   * Checks if resource has been updated into the database
-![Figure 1-7. GET METHOD](./assets/png/7.png)
-   * Deletes a specific resource from the database
-![Figure 1-8. DELETE METHOD](./assets/png/8.png)
-   * Check if a specific resource has been deleted from the database 
-![Figure 1-9. GET METHOD](./assets/png/9.png)
+
+   * GET - Request a resource from our WEB server
+   ```console
+        $ curl --location --request GET 'http://localhost:8080/services' \
+--header 'Content-Type: application/json'
+   ```
+![Figure 1-1. GET](./assets/png/1.png)
+
+   * POST - Send a large amount of data to our WEB server
+   ```console
+        $ curl --location --request POST 'http://localhost:8080/services?name=AWS&description=Amazon%20Web%20Service' \
+--header 'Content-Type: application/json'
+   ```
+![Figure 1-2. POST](./assets/png/2.png)
+
+   * PUT - Updates all current representations of the resource covered by the content of the query.
+```console
+        $ curl --location --request PUT 'http://localhost:8080/services?name=OVH&description=OVHCloud%20Service&id=915566002' \
+--header 'Content-Type: application/json'
+   ```
+![Figure 1-3. POST](./assets/png/3.png)
+
+   * DELETE - Delete a specified resource
+```console
+        $ curl --location --request DELETE 'http://localhost:8080/services?id=915566002' \
+--header 'Content-Type: application/json'
+```
+![Figure 1-4. POST](./assets/png/4.png)
      
 When you use your Web Browser (for example : Firefox, Edge, Chrome, Opera or Safari) :
    * To Sign In to Efamorgi Web Platform
-![Figure 1-10. SIGN IN PAGE](./assets/png/10.png)
+![Figure 1-10. SIGN IN PAGE](./assets/png/5.png)
    * To Sign Up to Efamorgi Web Platform
-![Figure 1-12. SIGN UP PAGE](./assets/png/11.png)
+![Figure 1-12. SIGN UP PAGE](./assets/png/6.png)
 ## Tutorial
 
 If you have Community or Ultimate Edition of IntelliJ and want to create your own servlet, you can follow the tutorial [`by Gaurav Gupta`](https://blog.payara.fish/payara-platform-support-for-intellij-plugin)

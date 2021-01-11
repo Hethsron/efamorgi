@@ -180,7 +180,7 @@ public class WebServices extends HttpServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Sets the character encoding (MIME charset)
         resp.setCharacterEncoding("UTF-8");
 
@@ -255,7 +255,7 @@ public class WebServices extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Sets the character encoding (MIME charset)
         resp.setCharacterEncoding("UTF-8");
 
