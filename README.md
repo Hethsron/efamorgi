@@ -13,7 +13,7 @@ It's fast and clean, give you freedom to enjoy with Java EE
 
 ## Plateforms
 
-efamorgi is compatible with all plateforms.
+efamorgi is Web Platform developed with IntelliJ IDEA Community and compatible with all platforms.
 
 ## Material Design
 
@@ -78,7 +78,7 @@ When you use [`Postman Desktop Agent`](https://www.postman.com/) to send request
 When you use your Web Browser (for example : Firefox, Edge, Chrome, Opera or Safari) :
    * To Sign In to Efamorgi Web Platform
 ![Figure 1-10. SIGN IN PAGE](./assets/png/10.png)
-   * To Sign Up to Efamorgi Web Plateform
+   * To Sign Up to Efamorgi Web Platform
 ![Figure 1-12. SIGN UP PAGE](./assets/png/11.png)
 ## Tutorial
 
