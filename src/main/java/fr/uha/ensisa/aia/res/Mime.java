@@ -33,26 +33,46 @@ package fr.uha.ensisa.aia.res;
  */
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 public enum Mime {
 
-    HTML("text/html"),
-    JSON("application/json"),
-    XML("application/xml");
+    CSS("text/css", "^([-/a-zA-Z0-9]+.css)$"),
+    HTML("text/html", "^([-/a-zA-Z0-9]+.html)$"),
+    ICON("image/x-icon", "^([-/a-zA-Z0-9]+.ico)$"),
+    JAVASCRIPT("application/javascript", "^([-/a-zA-Z0-9]+.js)$"),
+    JPEG("image/jpeg", "^([-/a-zA-Z0-9]+.jpeg)$"),
+    JSON("application/json", "^([-/a-zA-Z0-9]+.json)$"),
+    TTF("font/ttf", "^([-/a-zA-Z0-9]+.ttf)$"),
+    WOFF("font/woff", "^([-/a-zA-Z0-9]+.woff)$"),
+    WOFF2("font/woff2", "^([-/a-zA-Z0-9]+.woff2)$"),
+    XML("application/xml", "^([-/a-zA-Z0-9]+.xml)$");
 
     private final String type;
+    private final String regex;
 
-    Mime(String type) {
+    Mime(String type, String regex) {
         this.type = type;
+        this.regex = regex;
     }
 
     public String getType() {
         return type;
     }
 
+    public String getRegex() {
+        return regex;
+    }
+
     public static Optional<Mime> find(String type) {
         return Arrays.stream(values())
                 .filter(mime -> mime.type.equalsIgnoreCase(type))
+                .findFirst();
+    }
+
+    public static Optional<Mime> get(String input) {
+        return Arrays.stream(values())
+                .filter(mime -> Pattern.matches(mime.regex, input))
                 .findFirst();
     }
 

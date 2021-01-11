@@ -10,9 +10,10 @@
         <meta name="category" content="science and technology">
         <meta name="author" content="Hethsron Jedaël BOUEYA">
         <meta name="copyright" content="© 2020 ENSISA (UHA) - All rights reserved.">
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link rel="shortcut icon" type="image/x-icon" href="ico/favicon.ico" >
+        <link rel="stylesheet" id="bootstrap-css" type="text/css" href="css/bootstrap.css">
+        <script type="application/javascript" src="js/bootstrap.js"></script>
+        <script type="application/javascript" src="js/jquery.js"></script>
     </head>
     <body>
         <div class="container">

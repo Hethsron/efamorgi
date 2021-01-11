@@ -32,12 +32,16 @@ package fr.uha.ensisa.aia;
  *                       	© 2020 ENSISA (UHA) - All rights reserved.
  */
 import fr.uha.ensisa.aia.factory.UserFactory;
+import fr.uha.ensisa.aia.res.Mime;
+
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
+import java.util.Optional;
 
 @WebServlet(name = "WebView", urlPatterns = "/")
 public class WebView extends HttpServlet {
@@ -46,7 +50,65 @@ public class WebView extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
+        final String uri = req.getRequestURI();
+        if (uri.equalsIgnoreCase("/")) {
+            // Display Welcome page
+            this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
+        }
+        else {
+            // Check if file exists and is not a directory
+            File file = new File("src/main/webapp/META-INF/assets" + uri);
+            if (file.exists() && !file.isDirectory()) {
+                // Find MIME Type
+                Optional<Mime> mime = Mime.get(uri);
+                switch (mime.get()) {
+                    case CSS:
+                        // Sets Content Type
+                        resp.setContentType(Mime.CSS.getType());
+                        break;
+                    case ICON:
+                        // Sets Content Type
+                        resp.setContentType(Mime.ICON.getType());
+                        break;
+                    case JAVASCRIPT:
+                        // Sets Content Type
+                        resp.setContentType(Mime.JAVASCRIPT.getType());
+                        break;
+                    case TTF:
+                        // Sets Content Type
+                        resp.setContentType(Mime.TTF.getType());
+                        break;
+                    case WOFF:
+                        // Sets Content Type
+                        resp.setContentType(Mime.WOFF.getType());
+                        break;
+                    case WOFF2:
+                        // Sets Content Type
+                        resp.setContentType(Mime.WOFF2.getType());
+                        break;
+                    default:
+                        break;
+                }
+
+
+                // Gets Buffer OutputStream
+                try (BufferedOutputStream out = new BufferedOutputStream(resp.getOutputStream())) {
+
+                    // Sets Buffer InputStream
+                    try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(file))) {
+
+                        // Sets default byte value
+                        int b = 0;
+                        while ((b = in.read()) != -1) {
+                            out.write(b);
+                        }
+                    }
+                }
+            }
+            else {
+                resp.getWriter().println("404 Error");
+            }
+        }
     }
 
 }
