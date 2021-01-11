@@ -58,16 +58,17 @@ For developement, before running the application, you need to clone this project
 
 ### Command-Line interface
 When you use [`Postman Desktop Agent`](https://www.postman.com/) to to send requests and receive responses through our REST API
-![Figure 1-1.](./assets/png/1.png)
-![Figure 1-2.](./assets/png/2.png)
-![Figure 1-3.](./assets/png/3.png)
-![Figure 1-4.](./assets/png/4.png)
-![Figure 1-5.](./assets/png/5.png)
-![Figure 1-6.](./assets/png/6.png)
-![Figure 1-7.](./assets/png/7.png)
-![Figure 1-8.](./assets/png/8.png)
-![Figure 1-9.](./assets/png/9.png)
-
+![Figure 1-1. GET METHOD](./assets/png/1.png)
+![Figure 1-2. PUT METHOD](./assets/png/2.png)
+![Figure 1-3. PUT METHOD](./assets/png/3.png)
+![Figure 1-4. GET METHOD](./assets/png/4.png)
+![Figure 1-5. GET METHOD](./assets/png/5.png)
+![Figure 1-6. POST METHOD](./assets/png/6.png)
+![Figure 1-7. GET METHOD](./assets/png/7.png)
+![Figure 1-8. DELETE METHOD](./assets/png/8.png)
+![Figure 1-9. GET METHOD](./assets/png/9.png)
+![Figure 1-10. SIGN IN PAGE](./assets/png/10.png)
+![Figure 1-12. SIGN UP PAGE](./assets/png/11.png)
 ## Tutorial
 
 If you have Community or Ultimate Edition of IntelliJ and want to create your own servlet, you can follow the tutorial [`by Gaurav Gupta`](https://blog.payara.fish/payara-platform-support-for-intellij-plugin)
