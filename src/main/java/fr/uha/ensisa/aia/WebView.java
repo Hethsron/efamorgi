@@ -48,5 +48,5 @@ public class WebView extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
     }
-    
+
 }
