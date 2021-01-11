@@ -75,8 +75,10 @@ When you use [`Postman Desktop Agent`](https://www.postman.com/) to send request
    * Check if a specific resource has been deleted from the database 
 ![Figure 1-9. GET METHOD](./assets/png/9.png)
      
-When you use your Web Browser (for example : Firefox, Edge, Chrome, Opera or Safari) to sign in or sign up to our platform :
+When you use your Web Browser (for example : Firefox, Edge, Chrome, Opera or Safari) :
+   * To Sign In to Efamorgi Web Platform
 ![Figure 1-10. SIGN IN PAGE](./assets/png/10.png)
+   * To Sign Up to Efamorgi Web Plateform
 ![Figure 1-12. SIGN UP PAGE](./assets/png/11.png)
 ## Tutorial
 
