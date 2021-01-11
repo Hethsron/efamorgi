@@ -46,7 +46,7 @@ public class WebView extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
     }
 
 }
