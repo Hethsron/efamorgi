@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-package fr.uha.ensisa.aia;
+package fr.uha.ensisa.aia.servlets.platform;
 /**
  *		@file            	WebView.java
  *      @details
@@ -31,11 +31,8 @@ package fr.uha.ensisa.aia;
  *                       	Licencied Material - Property of Us®
  *                       	© 2020 ENSISA (UHA) - All rights reserved.
  */
-import fr.uha.ensisa.aia.factory.UserFactory;
 import fr.uha.ensisa.aia.res.Mime;
-
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,12 +43,10 @@ import java.util.Optional;
 @WebServlet(name = "WebView", urlPatterns = "/")
 public class WebView extends HttpServlet {
 
-    private UserFactory factory = new UserFactory();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String uri = req.getRequestURI();
-        if (uri.equalsIgnoreCase("/")) {
+        if (uri.equalsIgnoreCase("/") || uri.equalsIgnoreCase("/#")) {
             // Display Welcome page
             this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
         }
