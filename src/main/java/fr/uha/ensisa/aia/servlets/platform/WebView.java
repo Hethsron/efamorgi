@@ -85,23 +85,43 @@ public class WebView extends HttpServlet {
                         break;
                 }
 
+                // Creates buffered input and output streams to respectively write or read data
+                BufferedOutputStream output = null;
+                BufferedInputStream input = null;
 
-                // Gets Buffer OutputStream
-                try (BufferedOutputStream out = new BufferedOutputStream(resp.getOutputStream())) {
+                try {
+                    // Initialize these buffered input and output streams
+                    output = new BufferedOutputStream(resp.getOutputStream());
+                    input = new BufferedInputStream(new FileInputStream(file));
 
-                    // Sets Buffer InputStream
-                    try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(file))) {
+                    // Sets default byte value
+                    int bytes = 0;
 
-                        // Sets default byte value
-                        int b = 0;
-                        while ((b = in.read()) != -1) {
-                            out.write(b);
-                        }
+                    // While there are bytes to read from buffered input stream
+                    while ((bytes = input.read()) != -1) {
+                        // Write bytes to this buffered output stream
+                        output.write(bytes);
                     }
+                }
+                catch (IOException e) {
+                    // Display the detail message of this Throwable
+                    System.err.println(e.getMessage());
+                }
+                finally {
+                    // Check if reference is not null
+                    if (input != null)
+                        // Closes this input stream and release any system resources
+                        input.close();
+
+                    // Check if reference is not null
+                    if (output != null)
+                        // Close this output stream and release any system resources
+                        output.close();
                 }
             }
             else {
-                resp.getWriter().println("404 Error");
+                // Display 404 page
+                this.getServletContext().getRequestDispatcher("/WEB-INF/404.jsp").forward(req, resp);
             }
         }
     }
