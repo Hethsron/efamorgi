@@ -11,16 +11,15 @@
         <meta name="author" content="Hethsron Jedaël BOUEYA">
         <meta name="copyright" content="© 2020 ENSISA (UHA) - All rights reserved.">
         <link rel="shortcut icon" type="image/x-icon" href="ico/favicon.ico" >
-        <link rel="stylesheet" id="bootstrap-css" type="text/css" href="css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script type="application/javascript" src="js/bootstrap.js"></script>
-        <script type="application/javascript" src="js/jquery.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
-    <body>
-        <div class="page-wrap d-flex flex-row align-items-center">
+    <body style="background: #dedede;">
+        <div class="page-wrap d-flex flex-row align-items-center" style="padding-top: 15%;">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-md-12 text-center">
+                    <div class="col-md-12 text-center" style="text-align: center;">
                         <span class="display-1 d-block">404</span>
                         <div class="mb-4 lead">The page you are looking for was not found.</div>
                         <a href="/" class="btn btn-link">Back to Home</a>

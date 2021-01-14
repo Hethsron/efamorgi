@@ -11,9 +11,9 @@
         <meta name="author" content="Hethsron Jedaël BOUEYA">
         <meta name="copyright" content="© 2020 ENSISA (UHA) - All rights reserved.">
         <link rel="shortcut icon" type="image/x-icon" href="ico/favicon.ico" >
-        <link rel="stylesheet" id="bootstrap-css" type="text/css" href="css/bootstrap.css">
-        <script type="application/javascript" src="js/bootstrap.js"></script>
-        <script type="application/javascript" src="js/jquery.js"></script>
+        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     </head>
     <body>
         <div class="container">
@@ -28,11 +28,11 @@
                             <form id="loginform" class="form-horizontal" role="form" action="login">
                                 <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="email">
+                                    <input id="login-username" type="text" class="form-control" name="email" value="" placeholder="email" required>
                                 </div>
                                 <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                                    <input id="login-password" type="password" class="form-control" name="password" placeholder="password" required>
                                 </div>
                                 <div class="input-group">
                                     <div class="checkbox">
@@ -76,25 +76,25 @@
                                 <div class="form-group">
                                     <label for="email" class="col-md-3 control-label">Email</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="email" placeholder="Email Address">
+                                        <input type="text" class="form-control" name="email" placeholder="Email Address" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="firstname" class="col-md-3 control-label">First Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="firstname" placeholder="First Name">
+                                        <input type="text" class="form-control" name="firstname" placeholder="First Name" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="lastname" class="col-md-3 control-label">Last Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="lastname" placeholder="Last Name">
+                                        <input type="text" class="form-control" name="lastname" placeholder="Last Name" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="password" class="col-md-3 control-label">Password</label>
                                     <div class="col-md-9">
-                                        <input type="password" class="form-control" name="passwd" placeholder="Password">
+                                        <input type="password" class="form-control" name="password" placeholder="Password" required>
                                     </div>
                                 </div>
                                 <div class="form-group">

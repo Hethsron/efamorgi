@@ -86,12 +86,11 @@ public class WebView extends HttpServlet {
                 }
 
                 // Creates buffered input and output streams to respectively write or read data
-                BufferedOutputStream output = null;
                 BufferedInputStream input = null;
 
                 try {
                     // Initialize these buffered input and output streams
-                    output = new BufferedOutputStream(resp.getOutputStream());
+                    BufferedOutputStream output = new BufferedOutputStream(resp.getOutputStream());
                     input = new BufferedInputStream(new FileInputStream(file));
 
                     // Sets default byte value
@@ -112,11 +111,6 @@ public class WebView extends HttpServlet {
                     if (input != null)
                         // Closes this input stream and release any system resources
                         input.close();
-
-                    // Check if reference is not null
-                    if (output != null)
-                        // Close this output stream and release any system resources
-                        output.close();
                 }
             }
             else {
@@ -125,5 +119,4 @@ public class WebView extends HttpServlet {
             }
         }
     }
-
 }

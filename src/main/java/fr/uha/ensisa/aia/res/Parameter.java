@@ -18,7 +18,7 @@
  */
 package fr.uha.ensisa.aia.res;
 /**
- *		@file            	Mime.java
+ *		@file            	Parameter.java
  *      @details
  *
  *      @author          	Hethsron Jedaël BOUEYA (hethsron-jedael.boueya@uha.fr)
@@ -31,45 +31,22 @@ package fr.uha.ensisa.aia.res;
  *                       	Licencied Material - Property of Us®
  *                       	© 2020 ENSISA (UHA) - All rights reserved.
  */
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.regex.Pattern;
 
-public enum Mime {
+public enum Parameter {
 
-    CSS("text/css", "^([.-/a-zA-Z0-9]+.css)$"),
-    HTML("text/html", "^([.-/a-zA-Z0-9]+.html)$"),
-    ICON("image/x-icon", "^([-/a-zA-Z0-9]+.ico)$"),
-    JAVASCRIPT("application/javascript", "^([.-/a-zA-Z0-9]+.js)$"),
-    JPEG("image/jpeg", "^([.-/a-zA-Z0-9]+.jpeg)$"),
-    JSON("application/json", "^([.-/a-zA-Z0-9]+.json)$"),
-    TTF("font/ttf", "^([.-/a-zA-Z0-9]+.ttf)$"),
-    WOFF("font/woff", "^([.-/a-zA-Z0-9]+.woff)$"),
-    WOFF2("font/woff2", "^([.-/a-zA-Z0-9]+.woff2)$"),
-    XML("application/xml", "^([.-/a-zA-Z0-9]+.xml)$");
+    EMAIL("email"),
+    FIRSTNAME("firstname"),
+    LASTNAME("lastname"),
+    PASSWORD("password");
 
-    private final String type;
-    private final String regex;
+    private final String name;
 
-    Mime(String type, String regex) {
-        this.type = type;
-        this.regex = regex;
+    Parameter(String name) {
+        this.name = name;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public static Optional<Mime> find(String type) {
-        return Arrays.stream(values())
-                .filter(mime -> mime.type.equalsIgnoreCase(type))
-                .findFirst();
-    }
-
-    public static Optional<Mime> get(String input) {
-        return Arrays.stream(values())
-                .filter(mime -> Pattern.matches(mime.regex, input))
-                .findFirst();
+    public String getName() {
+        return name;
     }
 
 }

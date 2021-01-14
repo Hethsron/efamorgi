@@ -32,6 +32,11 @@ package fr.uha.ensisa.aia.dao;
  *                       	© 2020 ENSISA (UHA) - All rights reserved.
  */
 import fr.uha.ensisa.aia.model.User;
+
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class UserDao implements Dao<User> {
@@ -69,6 +74,34 @@ public class UserDao implements Dao<User> {
     @Override
     public long count() {
         return store.size();
+    }
+
+    public void populate() {
+        if (store.size() != 0) {
+            // Create a JSON array Builder
+            JsonArrayBuilder array = Json.createArrayBuilder();
+            for (User user : store.values()) {
+                // Creates a JsonObject Builder
+                array.add(Json.createObjectBuilder()
+                        .add("id", user.getId())
+                        .add("lastname", user.getLastname())
+                        .add("firstname", user.getFirstname())
+                        .add("email", user.getEmail())
+                        .add("password", user.getPassword())
+                        .add("date", user.getDate())
+                        .build());
+            }
+
+            //Write JSON file
+            try (FileWriter file = new FileWriter("src/main/webapp/META-INF/assets/json/database.json")) {
+                // Save JSON object to server
+                file.write(array.build().toString());
+                file.flush();
+            }
+            catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
+        }
     }
 
 }
