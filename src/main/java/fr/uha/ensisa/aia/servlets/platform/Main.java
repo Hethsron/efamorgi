@@ -18,7 +18,7 @@
  */
 package fr.uha.ensisa.aia.servlets.platform;
 /**
- *		@file            	WebView.java
+ *		@file            	Main.java
  *      @details
  *
  *      @author          	Hethsron Jedaël BOUEYA (hethsron-jedael.boueya@uha.fr)
@@ -32,6 +32,8 @@ package fr.uha.ensisa.aia.servlets.platform;
  *                       	© 2020 ENSISA (UHA) - All rights reserved.
  */
 import fr.uha.ensisa.aia.res.Mime;
+import fr.uha.ensisa.aia.res.Parameter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,11 +42,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Optional;
 
-@WebServlet(name = "WebView", urlPatterns = "/")
-public class WebView extends HttpServlet {
+@WebServlet(name = "Main", urlPatterns = "/")
+public class Main extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Check if the object bounds with the session is not null
+        if (req.getSession().getAttribute(Parameter.LOGOUT.getName()) != null) {
+            // Invalidate this session then unbinds any objects bound to it
+            req.getSession().invalidate();
+        }
+
         final String uri = req.getRequestURI();
         if (uri.equalsIgnoreCase("/") || uri.equalsIgnoreCase("/#")) {
             // Display Welcome page

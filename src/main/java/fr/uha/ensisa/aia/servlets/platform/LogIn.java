@@ -18,7 +18,7 @@
  */
 package fr.uha.ensisa.aia.servlets.platform;
 /**
- *		@file            	SignUp.java
+ *		@file            	LogIn.java
  *      @details
  *
  *      @author          	Hethsron Jedaël BOUEYA (hethsron-jedael.boueya@uha.fr)
@@ -41,8 +41,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "SignUp", urlPatterns = "/signup")
-public class SignUp extends HttpServlet {
+@WebServlet(name = "LogIn", urlPatterns = "/login")
+public class LogIn extends HttpServlet {
 
     private UserFactory factory = new UserFactory();
 
@@ -50,21 +50,29 @@ public class SignUp extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Gets values of request parameter as a String
         String email = req.getParameter(Parameter.EMAIL.getName());
-        String firstname = req.getParameter(Parameter.FIRSTNAME.getName());
-        String lastname = req.getParameter(Parameter.LASTNAME.getName());
         String password = req.getParameter(Parameter.PASSWORD.getName());
 
-        // Check if parameters have not null references
-        if (email != null && firstname != null && lastname != null && password != null) {
-            // Save new user in the database
-            factory.getDao().persist(new User(lastname, firstname, email, password));
+        // Identifies and extracts data from the database
+        factory.getDao().retrieval();
 
-            // Populate the database
-            factory.getDao().populate();
+        // Check if the user has the right to log in
+        if (factory.getDao().contains(email, password)) {
+            // Gets the user
+            User user = factory.getDao().get(email, password);
+
+            // Bind an object to this session
+            req.getSession().setAttribute(Parameter.DATE.getName(), user.getDate());
+            req.getSession().setAttribute(Parameter.EMAIL.getName(), user.getEmail());
+            req.getSession().setAttribute(Parameter.FIRSTNAME.getName(), user.getFirstname());
+            req.getSession().setAttribute(Parameter.LASTNAME.getName(), user.getLastname());
+
+            // Send a temporary redirect response to the client
+            resp.sendRedirect("/home");
         }
-
-        // Send a temporary redirect response to the client
-        resp.sendRedirect("/");
+        else {
+            // Send a temporary redirect response to the client
+            resp.sendRedirect("/");
+        }
     }
 
 }

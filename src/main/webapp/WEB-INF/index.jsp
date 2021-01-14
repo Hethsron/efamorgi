@@ -3,17 +3,22 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8" />
-        <title>efimorgi</title>
+        <title>efamorgi</title>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="description" content="A Java EE application created as part of the Advanced Internet Application course">
         <meta name="category" content="science and technology">
         <meta name="author" content="Hethsron Jedaël BOUEYA">
         <meta name="copyright" content="© 2020 ENSISA (UHA) - All rights reserved.">
-        <link rel="shortcut icon" type="image/x-icon" href="ico/favicon.ico" >
+        <link rel="shortcut icon" type="image/x-icon" href="https://images-na.ssl-images-amazon.com/images/I/419Q%2B-Vi-wL.png" >
         <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+        <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
     </head>
     <body>
         <div class="container">
@@ -21,7 +26,7 @@
                 <div class="panel panel-info" >
                     <div class="panel-heading">
                         <div class="panel-title">Sign In</div>
-                        <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
+                        <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#" style="text-decoration: none;">Forgot password?</a></div>
                     </div>
                     <div style="padding-top:30px" class="panel-body" >
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
@@ -51,7 +56,7 @@
                                     <div class="col-md-12 control">
                                         <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
                                             Don't have an account!
-                                        <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                                        <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()" style="text-decoration: none;">
                                             Sign Up Here
                                         </a>
                                         </div>
@@ -65,7 +70,7 @@
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <div class="panel-title">Sign Up</div>
-                            <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
+                            <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()" style="text-decoration: none;">Sign In</a></div>
                         </div>
                         <div class="panel-body" >
                             <form id="signupform" class="form-horizontal" role="form" action="signup">

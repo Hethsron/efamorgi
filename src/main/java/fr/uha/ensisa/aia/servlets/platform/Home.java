@@ -18,7 +18,7 @@
  */
 package fr.uha.ensisa.aia.servlets.platform;
 /**
- *		@file            	SignIn.java
+ *		@file            	Home.java
  *      @details
  *
  *      @author          	Hethsron Jedaël BOUEYA (hethsron-jedael.boueya@uha.fr)
@@ -31,42 +31,28 @@ package fr.uha.ensisa.aia.servlets.platform;
  *                       	Licencied Material - Property of Us®
  *                       	© 2020 ENSISA (UHA) - All rights reserved.
  */
-import fr.uha.ensisa.aia.factory.UserFactory;
 import fr.uha.ensisa.aia.res.Parameter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
-@WebServlet(name = "SignIn", urlPatterns = "/login")
-public class SignIn extends HttpServlet {
-
-    private UserFactory factory = new UserFactory();
+@WebServlet(name = "Home", urlPatterns = "/home")
+public class Home extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("UTF-8");
-
-        PrintWriter out = resp.getWriter();
-
-        String email = req.getParameter(Parameter.EMAIL.getName());
-        String password = req.getParameter(Parameter.PASSWORD.getName());
-
-        factory.getDao().retrieval();
-
-        // Check if the user has the right to log in
-        if (factory.getDao().contains(email, password)) {
-            out.println(email);
-            out.println(password);
-            out.println("connected");
+        // Check if the object bounds with the session is not null
+        if (req.getSession().getAttribute(Parameter.FIRSTNAME.getName()) != null && req.getSession().getAttribute(Parameter.LASTNAME.getName())!= null) {
+            // Display Home page
+            this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
         }
         else {
-            // Send a temporary redirect response to the client
-            resp.sendRedirect("/");
+            // Display 403 page
+            this.getServletContext().getRequestDispatcher("/WEB-INF/403.jsp").forward(req, resp);
         }
     }
-
 }

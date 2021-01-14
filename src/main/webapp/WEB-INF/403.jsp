@@ -3,7 +3,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8" />
-        <title>404</title>
+        <title>403</title>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="description" content="A Java EE application created as part of the Advanced Internet Application course">
@@ -25,8 +25,8 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-12 text-center" style="text-align: center;">
-                        <span class="display-1 d-block">404</span>
-                        <div class="mb-4 lead">The Page You Are Looking For Was Not Found.</div>
+                        <span class="display-1 d-block">403</span>
+                        <div class="mb-4 lead">Access Denied.<br>You Do Not Have Permission To Access To This Area On This Server.<br>Please Login First.</div>
                         <a href="/" class="btn btn-link" style="text-decoration: none;">Back to Home</a>
                     </div>
                 </div>

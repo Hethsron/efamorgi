@@ -174,4 +174,13 @@ public class UserDao implements Dao<User> {
         return false;
     }
 
+    public User get(String email, String password) {
+        for (User user : store.values()) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
 }

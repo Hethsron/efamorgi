@@ -39,6 +39,7 @@ public enum Parameter {
     FIRSTNAME("firstname"),
     ID("id"),
     LASTNAME("lastname"),
+    LOGOUT("logout"),
     PASSWORD("password");
 
     private final String name;
