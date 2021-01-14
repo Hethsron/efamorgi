@@ -32,9 +32,12 @@ package fr.uha.ensisa.aia.dao;
  *                       	© 2020 ENSISA (UHA) - All rights reserved.
  */
 import fr.uha.ensisa.aia.model.User;
-
+import fr.uha.ensisa.aia.res.Parameter;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
+import javax.json.stream.JsonParser;
+import javax.json.stream.JsonParserFactory;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -77,31 +80,98 @@ public class UserDao implements Dao<User> {
     }
 
     public void populate() {
+        final String FILENAME = "src/main/webapp/META-INF/assets/json/database.json";
         if (store.size() != 0) {
             // Create a JSON array Builder
             JsonArrayBuilder array = Json.createArrayBuilder();
             for (User user : store.values()) {
                 // Creates a JsonObject Builder
                 array.add(Json.createObjectBuilder()
-                        .add("id", user.getId())
-                        .add("lastname", user.getLastname())
-                        .add("firstname", user.getFirstname())
-                        .add("email", user.getEmail())
-                        .add("password", user.getPassword())
-                        .add("date", user.getDate())
+                        .add(Parameter.ID.getName(), user.getId())
+                        .add(Parameter.LASTNAME.getName(), user.getLastname())
+                        .add(Parameter.FIRSTNAME.getName(), user.getFirstname())
+                        .add(Parameter.EMAIL.getName(), user.getEmail())
+                        .add(Parameter.PASSWORD.getName(), user.getPassword())
+                        .add(Parameter.DATE.getName(), user.getDate())
                         .build());
             }
 
-            //Write JSON file
-            try (FileWriter file = new FileWriter("src/main/webapp/META-INF/assets/json/database.json")) {
+            // Write JSON file
+            try (FileWriter writer = new FileWriter(FILENAME)) {
                 // Save JSON object to server
-                file.write(array.build().toString());
-                file.flush();
+                writer.write(array.build().toString());
+
+                // Flush the stream
+                writer.flush();
             }
             catch (IOException e) {
                 System.err.println(e.getMessage());
             }
         }
+    }
+
+    public void retrieval() {
+        final String FILENAME = "src/main/webapp/META-INF/assets/json/database.json";
+        if (store.size() == 0) {
+            // Creates a parser factory for creating JsonParser object
+            JsonParserFactory parserFactory = Json.createParserFactory(null);
+
+            // Read JSON file
+            try (FileReader reader = new FileReader(FILENAME)) {
+                // Creates a JsonParser from a stream character
+                JsonParser parser = parserFactory.createParser(reader);
+
+                // Creates an empty list with initial capacity
+                List<String> values = new ArrayList<>();
+
+                // While there are more parsing
+                while (parser.hasNext()) {
+                    // Return the event of the next parsing state
+                    JsonParser.Event event = parser.next();
+                    switch (event) {
+                        case KEY_NAME: {
+                            // TODO : NOTHING
+                            break;
+                        }
+                        case VALUE_STRING: {
+                            // Appends the specified element to the list
+                            values.add(parser.getString());
+                            break;
+                        }
+                        case VALUE_NUMBER: {
+                            // Appends the specified element to the list
+                            values.add(String.valueOf(parser.getLong()));
+                            break;
+                        }
+                    }
+
+                    if (values.size() == 6) {
+                        // Define new user
+                        User user = new User(values.get(1), values.get(2), values.get(3), values.get(4));
+                        user.setId(Long.parseLong(values.get(0)));
+                        user.setDate(values.get(5));
+
+                        // Adds the new user in the database
+                        persist(user);
+
+                        // Remove all elements from the list
+                        values.clear();
+                    }
+                }
+            }
+            catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+    }
+
+    public boolean contains(String email, String password) {
+        for (User user : store.values()) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

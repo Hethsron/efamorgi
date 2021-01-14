@@ -57,32 +57,40 @@ public class WebView extends HttpServlet {
                 // Find MIME Type
                 Optional<Mime> mime = Mime.get(uri);
                 switch (mime.get()) {
-                    case CSS:
+                    case CSS: {
                         // Sets Content Type
                         resp.setContentType(Mime.CSS.getType());
                         break;
-                    case ICON:
+                    }
+                    case ICON: {
                         // Sets Content Type
                         resp.setContentType(Mime.ICON.getType());
                         break;
-                    case JAVASCRIPT:
+                    }
+                    case JAVASCRIPT: {
                         // Sets Content Type
                         resp.setContentType(Mime.JAVASCRIPT.getType());
                         break;
-                    case TTF:
+                    }
+                    case TTF: {
                         // Sets Content Type
                         resp.setContentType(Mime.TTF.getType());
                         break;
-                    case WOFF:
+                    }
+                    case WOFF: {
                         // Sets Content Type
                         resp.setContentType(Mime.WOFF.getType());
                         break;
-                    case WOFF2:
+                    }
+                    case WOFF2: {
                         // Sets Content Type
                         resp.setContentType(Mime.WOFF2.getType());
                         break;
-                    default:
+                    }
+                    default: {
+                        // TODO: NOTHING
                         break;
+                    }
                 }
 
                 // Creates buffered input and output streams to respectively write or read data
@@ -108,9 +116,10 @@ public class WebView extends HttpServlet {
                 }
                 finally {
                     // Check if reference is not null
-                    if (input != null)
+                    if (input != null) {
                         // Closes this input stream and release any system resources
                         input.close();
+                    }
                 }
             }
             else {

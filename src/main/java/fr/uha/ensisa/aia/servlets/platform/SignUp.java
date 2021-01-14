@@ -63,6 +63,8 @@ public class SignUp extends HttpServlet {
             factory.getDao().populate();
         }
 
+        // Send a temporary redirect response to the client
         resp.sendRedirect("/");
     }
+    
 }

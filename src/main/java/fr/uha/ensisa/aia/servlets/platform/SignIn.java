@@ -31,8 +31,8 @@ package fr.uha.ensisa.aia.servlets.platform;
  *                       	Licencied Material - Property of Us®
  *                       	© 2020 ENSISA (UHA) - All rights reserved.
  */
+import fr.uha.ensisa.aia.factory.UserFactory;
 import fr.uha.ensisa.aia.res.Parameter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,16 +44,29 @@ import java.io.PrintWriter;
 @WebServlet(name = "SignIn", urlPatterns = "/login")
 public class SignIn extends HttpServlet {
 
+    private UserFactory factory = new UserFactory();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
-        String email = req.getParameter(Parameter.EMAIL.getName());
-        String password = req.getParameter(Parameter.PASSWORD.getName());
 
         PrintWriter out = resp.getWriter();
 
-        out.println("email : " + email);
-        out.println("password : " + password);
+        String email = req.getParameter(Parameter.EMAIL.getName());
+        String password = req.getParameter(Parameter.PASSWORD.getName());
+
+        factory.getDao().retrieval();
+
+        // Check if the user has the right to log in
+        if (factory.getDao().contains(email, password)) {
+            out.println(email);
+            out.println(password);
+            out.println("connected");
+        }
+        else {
+            // Send a temporary redirect response to the client
+            resp.sendRedirect("/");
+        }
     }
 
 }

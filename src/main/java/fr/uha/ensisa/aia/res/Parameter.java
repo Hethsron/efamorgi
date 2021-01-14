@@ -34,8 +34,10 @@ package fr.uha.ensisa.aia.res;
 
 public enum Parameter {
 
+    DATE("date"),
     EMAIL("email"),
     FIRSTNAME("firstname"),
+    ID("id"),
     LASTNAME("lastname"),
     PASSWORD("password");
 

@@ -81,7 +81,7 @@ public class WebServices extends HttpServlet {
             // Find MIME Type
             Optional<Mime> mime = Mime.find(type);
             switch (mime.get()) {
-                case JSON:
+                case JSON: {
                     // Sets the content type of the response being sent to the client,
                     resp.setContentType(Mime.JSON.getType());
 
@@ -98,8 +98,7 @@ public class WebServices extends HttpServlet {
 
                         // Send JSON object to client
                         out.println(value.toString());
-                    }
-                    else {
+                    } else {
                         // Sets the status code for this response.
                         resp.setStatus(200);
 
@@ -120,7 +119,8 @@ public class WebServices extends HttpServlet {
                         out.println(array.build().toString());
                     }
                     break;
-                case XML:
+                }
+                case XML: {
                     // Sets the content type of the response being sent to the client,
                     resp.setContentType(Mime.XML.getType());
 
@@ -133,8 +133,7 @@ public class WebServices extends HttpServlet {
                         out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
                         out.println("<error>There's no service</error>");
                         out.println("<status>HTTP/1.1 404</status>");
-                    }
-                    else {
+                    } else {
                         // Sets the status code for this response.
                         resp.setStatus(200);
 
@@ -153,7 +152,8 @@ public class WebServices extends HttpServlet {
                         out.println("</services>");
                     }
                     break;
-                default:
+                }
+                default: {
                     // Sets the content type of the response being sent to the client,
                     resp.setContentType(Mime.HTML.getType());
 
@@ -164,8 +164,7 @@ public class WebServices extends HttpServlet {
 
                         // Send HTML object to client
                         out.println("{ error=\'There's no service\', status=\'HTTP/1.1 404\' }");
-                    }
-                    else {
+                    } else {
                         // Sets the status code for this response.
                         resp.setStatus(200);
 
@@ -175,6 +174,7 @@ public class WebServices extends HttpServlet {
                         }
                     }
                     break;
+                }
             }
         }
     }
@@ -213,7 +213,7 @@ public class WebServices extends HttpServlet {
             // Find MIME Type
             Optional<Mime> mime = Mime.find(type);
             switch (mime.get()) {
-                case JSON:
+                case JSON: {
                     // Sets the content type of the response being sent to the client,
                     resp.setContentType(Mime.JSON.getType());
 
@@ -229,7 +229,8 @@ public class WebServices extends HttpServlet {
                     // Send JSON object to client
                     out.println(value.toString());
                     break;
-                case XML:
+                }
+                case XML: {
                     // Sets the content type of the response being sent to the client,
                     resp.setContentType(Mime.XML.getType());
 
@@ -243,13 +244,15 @@ public class WebServices extends HttpServlet {
                     out.println("\t<status>Created</status>");
                     out.println("</service>");
                     break;
-                default:
+                }
+                default: {
                     // Sets the content type of the response being sent to the client,
                     resp.setContentType(Mime.HTML.getType());
 
                     // Send HTML object to client
                     out.println(s.toString());
                     break;
+                }
             }
         }
     }
@@ -291,7 +294,7 @@ public class WebServices extends HttpServlet {
                 // Find MIME Type
                 Optional<Mime> mime = Mime.find(type);
                 switch (mime.get()) {
-                    case JSON:
+                    case JSON: {
                         // Sets the content type of the response being sent to the client,
                         resp.setContentType(Mime.JSON.getType());
 
@@ -307,7 +310,8 @@ public class WebServices extends HttpServlet {
                         // Send JSON object to client
                         out.println(value.toString());
                         break;
-                    case XML:
+                    }
+                    case XML: {
                         // Sets the content type of the response being sent to the client,
                         resp.setContentType(Mime.XML.getType());
 
@@ -321,13 +325,15 @@ public class WebServices extends HttpServlet {
                         out.println("\t<status>Updated</status>");
                         out.println("</service>");
                         break;
-                    default:
+                    }
+                    default: {
                         // Sets the content type of the response being sent to the client,
                         resp.setContentType(Mime.HTML.getType());
 
                         // Send HTML object to client
                         out.println(s.toString());
                         break;
+                    }
                 }
             }
             else {
@@ -337,7 +343,7 @@ public class WebServices extends HttpServlet {
                 // Find MIME Type
                 Optional<Mime> mime = Mime.find(type);
                 switch (mime.get()) {
-                    case JSON:
+                    case JSON: {
                         // Sets the content type of the response being sent to the client,
                         resp.setContentType(Mime.JSON.getType());
 
@@ -350,7 +356,8 @@ public class WebServices extends HttpServlet {
                         // Send JSON object to client
                         out.println(value.toString());
                         break;
-                    case XML:
+                    }
+                    case XML: {
                         // Sets the content type of the response being sent to the client,
                         resp.setContentType(Mime.XML.getType());
 
@@ -359,10 +366,12 @@ public class WebServices extends HttpServlet {
                         out.println("<error>Conflict</error>");
                         out.println("<status>HTTP/1.1 409</status>");
                         break;
-                    default:
+                    }
+                    default: {
                         // Send HTML object to client
                         out.println("{ error=\'Conflict\', status=\'HTTP/1.1 409\' }");
                         break;
+                    }
                 }
             }
         }
@@ -403,7 +412,7 @@ public class WebServices extends HttpServlet {
                 // Find MIME Type
                 Optional<Mime> mime = Mime.find(type);
                 switch (mime.get()) {
-                    case JSON:
+                    case JSON: {
                         // Sets the content type of the response being sent to the client,
                         resp.setContentType(Mime.JSON.getType());
 
@@ -419,7 +428,8 @@ public class WebServices extends HttpServlet {
                         // Send JSON object to client
                         out.println(value.toString());
                         break;
-                    case XML:
+                    }
+                    case XML: {
                         // Sets the content type of the response being sent to the client,
                         resp.setContentType(Mime.XML.getType());
 
@@ -433,13 +443,15 @@ public class WebServices extends HttpServlet {
                         out.println("\t<status>Deleted</status>");
                         out.println("</service>");
                         break;
-                    default:
+                    }
+                    default: {
                         // Sets the content type of the response being sent to the client,
                         resp.setContentType(Mime.HTML.getType());
 
                         // Send HTML object to client
                         out.println(s.toString());
                         break;
+                    }
                 }
             }
             else {
@@ -449,7 +461,7 @@ public class WebServices extends HttpServlet {
                 // Find MIME Type
                 Optional<Mime> mime = Mime.find(type);
                 switch (mime.get()) {
-                    case JSON:
+                    case JSON: {
                         // Sets the content type of the response being sent to the client,
                         resp.setContentType(Mime.JSON.getType());
 
@@ -462,7 +474,8 @@ public class WebServices extends HttpServlet {
                         // Send JSON object to client
                         out.println(value.toString());
                         break;
-                    case XML:
+                    }
+                    case XML: {
                         // Sets the content type of the response being sent to the client,
                         resp.setContentType(Mime.XML.getType());
 
@@ -471,10 +484,12 @@ public class WebServices extends HttpServlet {
                         out.println("<error>Conflict</error>");
                         out.println("<status>HTTP/1.1 409</status>");
                         break;
-                    default:
+                    }
+                    default: {
                         // Send HTML object to client
                         out.println("{ error=\'Conflict\', status=\'HTTP/1.1 409\' }");
                         break;
+                    }
                 }
             }
         }
